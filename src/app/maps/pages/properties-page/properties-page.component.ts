@@ -55,7 +55,7 @@ export class PropertiesPageComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log("Destroy")
+    this.map?.remove()
   }
 
 }

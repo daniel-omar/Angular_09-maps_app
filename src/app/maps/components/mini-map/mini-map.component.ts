@@ -26,15 +26,15 @@ export class MiniMapComponent implements AfterViewInit, OnDestroy {
       style: 'mapbox://styles/mapbox/streets-v12', // style URL
       center: this.currentLngLat, // starting position [lng, lat]
       zoom: this.zoom, // starting zoom
-      interactive:false
+      interactive: false
     })
 
     const color = '#xxxxxx'.replace(/x/g, y => (Math.random() * 16 | 0).toString(16));
-    this.createMarker(this.currentLngLat,color);
+    this.createMarker(this.currentLngLat, color);
 
   }
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.map?.remove();
   }
 
   createMarker(lngLat: LngLat, color: string) {
