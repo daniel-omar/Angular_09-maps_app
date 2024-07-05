@@ -1,5 +1,6 @@
-import { AfterContentInit, AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ElementRef, OnDestroy, Output, ViewChild, EventEmitter } from '@angular/core';
 import { LngLat, Map } from 'mapbox-gl';
+import { MapComponent } from '../../components/map/map.component';
 
 @Component({
   selector: 'app-zoom-range-page',
@@ -8,59 +9,64 @@ import { LngLat, Map } from 'mapbox-gl';
 })
 export class ZoomRangePageComponent implements AfterViewInit, OnDestroy {
 
-  @ViewChild("map")
-  public divMap?: ElementRef;
-  public zoom: number = 10
-  public map?: Map;
-  public currentLngLat: LngLat = new LngLat(-74.5, 40)
+  public zoomCurrent: number = 10
+  public currentLngLat?: LngLat;
+
+  @ViewChild(MapComponent)
+  private mapComponent?: MapComponent;
 
   ngAfterViewInit(): void {
-    if (!this.divMap) return
+    // if (!this.divMap) return
 
-    this.map = new Map({
-      container: this.divMap.nativeElement, // container ID
-      style: 'mapbox://styles/mapbox/streets-v12', // style URL
-      center: this.currentLngLat, // starting position [lng, lat]
-      zoom: this.zoom, // starting zoom
-    });
+    // this.map = new Map({
+    //   container: this.divMap.nativeElement, // container ID
+    //   style: 'mapbox://styles/mapbox/streets-v12', // style URL
+    //   center: this.currentLngLat, // starting position [lng, lat]
+    //   zoom: this.zoom, // starting zoom
+    // });
 
-    this.mapListeners();
+    // this.mapListeners();
   }
 
-  mapListeners() {
+  // mapListeners() {
 
-    if (!this.map) return;
+  //   if (!this.map) return;
 
-    this.map.on('zoom', (event) => {
-      this.zoom = this.map!.getZoom();
-    })
+  //   this.map.on('zoom', (event) => {
+  //     this.zoom = this.map!.getZoom();
+  //   })
 
-    this.map.on('zoomend', (event) => {
-      if (this.map!.getZoom() < 18) return
-      this.map!.zoomTo(18)
-    })
+  //   this.map.on('zoomend', (event) => {
+  //     if (this.map!.getZoom() < 18) return
+  //     this.map!.zoomTo(18)
+  //   })
 
-    this.map.on("moveend", (event) => {
-      this.currentLngLat = this.map!.getCenter();
-      console.log(this.currentLngLat)
-    })
+  //   this.map.on("moveend", (event) => {
+  //     this.currentLngLat = this.map!.getCenter();
+  //     console.log(this.currentLngLat)
+  //   })
 
-  }
+  // }
 
   zoomIn() {
-    this.map?.zoomIn();
+    if (!this.mapComponent) return;
+    this.mapComponent.zoomIn();
   }
 
   zoomOut() {
-    this.map?.zoomOut();
+    if (!this.mapComponent) return;
+    this.mapComponent.zoomOut();
   }
 
   zoomChange(value: string) {
-    this.zoom = Number(value);
-    this.map!.zoomTo(this.zoom);
+    const zoom_: number = Number(value)
+    this.mapComponent?.zoomChange(zoom_);
+  }
+
+  zoomChangeInput(zoom: number) {
+    this.zoomCurrent = zoom;
   }
 
   ngOnDestroy(): void {
-    this.map?.remove()
   }
 }

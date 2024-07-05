@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
-import { Map } from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+import { Map, LngLat } from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 
 
 @Component({
@@ -11,6 +11,7 @@ export class FullScreenPageComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild("map")
   public divMap?: ElementRef;
+  public lngLat?:[number,number]=[-74.5, 40]
 
   ngOnDestroy(): void {
     console.log("GAA")
@@ -18,14 +19,14 @@ export class FullScreenPageComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
 
-    if (!this.divMap) return
+    // if (!this.divMap) return
 
-    const map = new Map({
-      container: this.divMap.nativeElement, // container ID
-      style: 'mapbox://styles/mapbox/streets-v12', // style URL
-      center: [-74.5, 40], // starting position [lng, lat]
-      zoom: 9, // starting zoom
-    });
+    // const map = new Map({
+    //   container: this.divMap.nativeElement, // container ID
+    //   style: 'mapbox://styles/mapbox/streets-v12', // style URL
+    //   center: [-74.5, 40], // starting position [lng, lat]
+    //   zoom: 9, // starting zoom
+    // });
 
   }
 

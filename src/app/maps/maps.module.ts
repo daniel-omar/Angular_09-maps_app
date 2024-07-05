@@ -12,6 +12,7 @@ import { SideMenuComponent } from '../alone/components/side-menu/side-menu.compo
 
 import * as mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import { CounterAloneComponent } from '../alone/components/counter-alone/counter-alone.component';
+import { MapComponent } from './components/map/map.component';
 (mapboxgl as any).accessToken = 'pk.eyJ1Ijoib21heWxsZWkxNTIwMCIsImEiOiJjbHhuYXd4MGUwMXA4MmpvZTd0dWQ3cDYzIn0.ZSqXGQI9X83YZgiSdBsMQQ';
 
 
@@ -23,7 +24,8 @@ import { CounterAloneComponent } from '../alone/components/counter-alone/counter
     FullScreenPageComponent,
     MarkersPageComponent,
     PropertiesPageComponent,
-    ZoomRangePageComponent
+    ZoomRangePageComponent,
+    MapComponent
 
   ],
   imports: [

@@ -1,7 +1,6 @@
-#map {
+#divMap {
   width: 100vw;
   height: 100vh;
-  background-color: red;
 }
 
 
@@ -22,7 +21,7 @@
   align-items: center;
   width: 100%;
 
-  *{
+  * {
     align-self: center;
     text-align: center;
   }
